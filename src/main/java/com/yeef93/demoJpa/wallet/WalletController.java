@@ -35,4 +35,10 @@ public class WalletController {
         var createdWallet = walletService.createWallet(wallet);
         return Response.successfulResponse(HttpStatus.CREATED.value(), "New Wallet created", walletService.updateWallet(createdWallet));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Response<Wallet>> updateWallet(@Validated @RequestBody Wallet wallet, @PathVariable long id) {
+        wallet.setId(id);
+        return Response.successfulResponse("Update wallet success", walletService.updateWallet(wallet));
+    }
 }
