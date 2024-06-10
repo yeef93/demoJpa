@@ -2,55 +2,68 @@ package com.yeef93.demoJpa.wallet.entity;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
+import lombok.*;
+import org.hibernate.annotations.SQLRestriction;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "tbl_wallet")
+@SQLRestriction("delete_at IS NULL")
 public class Wallet {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "wallet_id_gen")
-    @SequenceGenerator(name = "wallet_id_gen", sequenceName = "wallet_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
     @Size(max = 255)
-    @NotNull
+    @NotBlank(message = "wallet name is required")
     @Column(name = "name", nullable = false, length = 255)
     private String name;
 
     @Size(max = 5)
-    @NotNull
+    @NotBlank(message = "currency is required")
     @Column(name = "currency", nullable = false, length = 5)
     private String currency;
 
-    @NotNull
+    @NotBlank(message = "amount is required")
+    @Min(value = 0, message = "Amount must be non-negative")
     @Column(name = "amount", nullable = false)
-    private Integer amount;
+    private Double amount;
 
-    @NotNull
-    @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "create_at", nullable = false)
-    private Instant createAt;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "create_at", nullable = false, updatable = false)
+    private Date createAt;
 
-    @NotNull
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "update_at", nullable = false)
-    private Instant updateAt;
+    private Date updateAt;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "delete_at")
-    private Instant deleteAt;
+    private Date deleteAt;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private Long userId;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "user_id", nullable = false)
+//    private Long userId;
+
+    @PrePersist
+    protected void onCreate(){
+        createAt = new Date();
+        updateAt = new Date();
+    }
+
+    @PreUpdate
+    protected  void onUpdate(){
+        updateAt = new Date();
+    }
 }

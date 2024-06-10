@@ -1,16 +1,11 @@
 package com.yeef93.demoJpa.user.entity;
 
-import com.yeef93.demoJpa.wallet.entity.Wallet;
+
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
 
 import java.sql.Timestamp;
-import java.time.Instant;
-import java.util.Set;
 
 @Getter
 @Setter

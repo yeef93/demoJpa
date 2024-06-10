@@ -8,6 +8,6 @@ import java.util.Optional;
 public interface WalletService {
     public List<Wallet> getWallet();
     public Optional<Wallet> getWallet(Long id);
-    public Wallet addWallet(Wallet wallet);
+    public Wallet createWallet(Wallet wallet);
     //public Wallet updateWallet(Wallet wallet);
 }

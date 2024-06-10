@@ -1,27 +1,46 @@
 package com.yeef93.demoJpa.wallet.service.impl;
 
-import com.yeef93.demoJpa.wallet.entity.Wallet;
-import com.yeef93.demoJpa.wallet.service.WalletService;
 
-import java.util.ArrayList;
+import com.yeef93.demoJpa.exceptions.DataNotFoundException;
+import com.yeef93.demoJpa.wallet.entity.Wallet;
+import com.yeef93.demoJpa.wallet.repository.WalletRepository;
+import com.yeef93.demoJpa.wallet.service.WalletService;
+import lombok.extern.java.Log;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
+@Service
+@Log
 public class WalletServiceImpl implements WalletService {
-    List<Wallet> wallet = new ArrayList<>();
+    private final WalletRepository walletRepository;
+
+    public WalletServiceImpl(WalletRepository walletRepository){
+        this.walletRepository = walletRepository;
+    }
 
     @Override
-    public List<Wallet> getWallet(){
+    public List<Wallet> getWallet() {
+        return  walletRepository.findAll();
+    }
+
+    @Override
+    public Optional<Wallet> getWallet(Long id) {
+        Optional<Wallet> wallet = walletRepository.findById(id);
+        if (wallet.isEmpty()) {
+            throw new DataNotFoundException("Wallet with ID " + id + " not found.");
+        }
         return wallet;
     }
 
     @Override
-    public Optional<Wallet> getWallet(Long id){
-        return wallet.stream().filter(wallet -> wallet.getId() == id).findFirst();
+    public Wallet createWallet(Wallet wallet) {
+        if (walletRepository.existsById(wallet.getId())) {
+            throw new DataNotFoundException("Wallet with ID " + wallet.getId() + " already exists.");
+        }
+        return walletRepository.save(wallet);
+
     }
 
-    @Override
-    public Wallet addWallet(Wallet wallet){
-        wallet.setId();
-    }
 }
