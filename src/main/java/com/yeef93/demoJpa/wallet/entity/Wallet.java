@@ -21,8 +21,9 @@ import java.util.Date;
 public class Wallet {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tbl_wallet_id_gen")
+    @SequenceGenerator(name = "tbl_wallet_id_gen", sequenceName = "tbl_wallet_id_seq", allocationSize = 1)
+    @Column(name = "id")
     private Long id;
 
     @Size(max = 255)
@@ -35,7 +36,6 @@ public class Wallet {
     @Column(name = "currency", nullable = false, length = 5)
     private String currency;
 
-    @NotBlank(message = "amount is required")
     @Min(value = 0, message = "Amount must be non-negative")
     @Column(name = "amount", nullable = false)
     private Double amount;

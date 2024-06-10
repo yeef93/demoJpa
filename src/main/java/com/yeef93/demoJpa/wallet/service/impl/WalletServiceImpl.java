@@ -40,7 +40,14 @@ public class WalletServiceImpl implements WalletService {
             throw new DataNotFoundException("Wallet with ID " + wallet.getId() + " already exists.");
         }
         return walletRepository.save(wallet);
+    }
 
+    @Override
+    public Wallet updateWallet(Wallet wallet) {
+        if (!walletRepository.existsById(wallet.getId())) {
+            throw new DataNotFoundException("Wallet with ID " + wallet.getId() + " does not exist.");
+        }
+        return walletRepository.save(wallet);
     }
 
 }
