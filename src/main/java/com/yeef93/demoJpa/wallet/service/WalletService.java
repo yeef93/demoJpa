@@ -10,4 +10,5 @@ public interface WalletService {
     public Optional<Wallet> getWallet(Long id);
     public Wallet createWallet(Wallet wallet);
     public Wallet updateWallet(Wallet wallet);
+    public  void deleteWallet(Long id);
 }

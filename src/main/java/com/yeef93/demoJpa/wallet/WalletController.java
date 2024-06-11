@@ -41,4 +41,10 @@ public class WalletController {
         wallet.setId(id);
         return Response.successfulResponse("Update wallet success", walletService.updateWallet(wallet));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Response<Wallet>> deleteWallet(@PathVariable long id){
+        walletService.deleteWallet(id);
+        return Response.successfulResponse("Wallet deleted");
+    }
 }

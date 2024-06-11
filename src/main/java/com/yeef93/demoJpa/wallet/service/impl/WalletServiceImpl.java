@@ -7,6 +7,7 @@ import com.yeef93.demoJpa.wallet.repository.WalletRepository;
 import com.yeef93.demoJpa.wallet.service.WalletService;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,6 +49,15 @@ public class WalletServiceImpl implements WalletService {
             throw new DataNotFoundException("Wallet with ID " + wallet.getId() + " does not exist.");
         }
         return walletRepository.save(wallet);
+    }
+
+    @Override
+    @Transactional
+    public void deleteWallet(Long id){
+        if(!walletRepository.existsById(id)){
+            throw new DataNotFoundException("Wallet with ID " +id+" does not exist.");
+        }
+        walletRepository.softDeleteById(id);
     }
 
 }
