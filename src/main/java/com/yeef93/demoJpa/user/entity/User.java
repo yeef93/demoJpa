@@ -1,15 +1,14 @@
 package com.yeef93.demoJpa.user.entity;
 
-
-import com.yeef93.demoJpa.wallet.entity.Wallet;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -35,14 +34,18 @@ public class User {
     @Column(name = "hash", length = 64)
     private String hash;
 
-    @Column(name = "create_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Timestamp createAt;
+    @CreationTimestamp
+    @ColumnDefault("CURRENT_TIMESTAMP")
+    @Column(name = "create_at", nullable = false, updatable = false)
+    private Date createAt;
 
-    @Column(name = "update_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Timestamp updateAt;
+    @UpdateTimestamp
+    @Column(name = "update_at", nullable = false)
+    private Date updateAt;
 
-    @Column(name = "delete_at", columnDefinition = "TIMESTAMP")
-    private Timestamp deleteAt;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "delete_at")
+    private Date deleteAt;
 
     @Column(name = "isfinish_onboarding", nullable = false, columnDefinition = "CHAR(1) DEFAULT '0'")
     private char isFinishOnboarding;

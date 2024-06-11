@@ -2,14 +2,13 @@ package com.yeef93.demoJpa.wallet.dto;
 
 import com.yeef93.demoJpa.user.entity.User;
 import com.yeef93.demoJpa.wallet.entity.Wallet;
-import jakarta.persistence.Entity;
 import lombok.Data;
 
 @Data
-public class CreateWalletRequestDTO {
+public class CreateUpdateWalletRequestDTO {
     private String name;
     private Double amount;
-    private String currency;
+    private Integer currency;
     private  long userId;
 
     public Wallet toEntity(){

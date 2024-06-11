@@ -1,7 +1,8 @@
 package com.yeef93.demoJpa.wallet;
 
 import com.yeef93.demoJpa.responses.Response;
-import com.yeef93.demoJpa.wallet.dto.CreateWalletRequestDTO;
+import com.yeef93.demoJpa.user.entity.User;
+import com.yeef93.demoJpa.wallet.dto.CreateUpdateWalletRequestDTO;
 import com.yeef93.demoJpa.wallet.entity.Wallet;
 import com.yeef93.demoJpa.wallet.service.WalletService;
 import org.springframework.http.HttpStatus;
@@ -10,11 +11,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/v1/wallets")
+@RequestMapping("api/v1/wallet")
 public class WalletController {
     private final WalletService walletService;
 
@@ -33,7 +33,7 @@ public class WalletController {
     }
 
     @PostMapping
-    public ResponseEntity<Response<Wallet>> createWallet(@Validated @RequestBody CreateWalletRequestDTO wallet) {
+    public ResponseEntity<Response<Wallet>> createWallet(@Validated @RequestBody CreateUpdateWalletRequestDTO wallet) {
         var createdWallet = walletService.createWallet(wallet);
         return Response.successfulResponse(HttpStatus.CREATED.value(), "New Wallet created", walletService.updateWallet(createdWallet));
     }
