@@ -1,11 +1,15 @@
 package com.yeef93.demoJpa.user.entity;
 
 
+import com.yeef93.demoJpa.wallet.entity.Wallet;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -14,7 +18,9 @@ import java.sql.Timestamp;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tbl_user_id_gen")
+    @SequenceGenerator(name = "tbl_user_id_gen", sequenceName = "tbl_user_id_seq", allocationSize = 1)
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "username", nullable = false, length = 200)
@@ -52,4 +58,7 @@ public class User {
 
     @Column(name = "profilepict")
     private String profilePict;
+
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<Wallet> wallet = new HashSet<>();
 }

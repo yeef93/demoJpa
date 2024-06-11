@@ -2,6 +2,7 @@ package com.yeef93.demoJpa.wallet.service.impl;
 
 
 import com.yeef93.demoJpa.exceptions.DataNotFoundException;
+import com.yeef93.demoJpa.wallet.dto.CreateWalletRequestDTO;
 import com.yeef93.demoJpa.wallet.entity.Wallet;
 import com.yeef93.demoJpa.wallet.repository.WalletRepository;
 import com.yeef93.demoJpa.wallet.service.WalletService;
@@ -36,11 +37,11 @@ public class WalletServiceImpl implements WalletService {
     }
 
     @Override
-    public Wallet createWallet(Wallet wallet) {
-        if (walletRepository.existsById(wallet.getId())) {
-            throw new DataNotFoundException("Wallet with ID " + wallet.getId() + " already exists.");
-        }
-        return walletRepository.save(wallet);
+    public Wallet createWallet(CreateWalletRequestDTO wallet) {
+//        if (walletRepository.existsById(wallet.)) {
+//            throw new DataNotFoundException("Wallet with ID " + wallet.getId() + " already exists.");
+//        }
+        return walletRepository.save(wallet.toEntity());
     }
 
     @Override

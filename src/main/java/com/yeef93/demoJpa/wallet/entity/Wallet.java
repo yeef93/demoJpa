@@ -1,6 +1,6 @@
 package com.yeef93.demoJpa.wallet.entity;
 
-
+import com.yeef93.demoJpa.user.entity.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -37,6 +37,7 @@ public class Wallet {
     @Column(name = "currency", nullable = false, length = 5)
     private String currency;
 
+    @NotNull(message = "amount is required")
     @Min(value = 0, message = "Amount must be non-negative")
     @Column(name = "amount", nullable = false)
     private Double amount;
@@ -53,9 +54,10 @@ public class Wallet {
     @Column(name = "delete_at")
     private Date deleteAt;
 
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "user_id", nullable = false)
-//    private Long userId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @PrePersist
     protected void onCreate(){
