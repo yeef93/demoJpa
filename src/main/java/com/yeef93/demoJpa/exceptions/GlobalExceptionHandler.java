@@ -1,6 +1,7 @@
 package com.yeef93.demoJpa.exceptions;
 
 import com.yeef93.demoJpa.responses.Response;
+import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,10 @@ import java.util.stream.Collectors;
 @Slf4j
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(ConstraintViolationException.class)
+    public final ResponseEntity<Response<String>> handleProductNotFoundException(ConstraintViolationException ex){
+        return Response.failedResponse(HttpStatus.NOT_FOUND.value(), "Data validation failed: " + ex.getMessage());
+    }
     @ExceptionHandler(DataNotFoundException.class)
     public final ResponseEntity<Response<String>> handleProductNotFoundException(DataNotFoundException ex){
         return Response.failedResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
@@ -45,4 +50,5 @@ public class GlobalExceptionHandler {
 
         return Response.failedResponse(HttpStatus.BAD_REQUEST.value(), "Unable to process the request: " + ex.getMessage());
     }
+
 }
