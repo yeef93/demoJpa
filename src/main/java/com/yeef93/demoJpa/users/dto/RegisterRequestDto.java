@@ -1,6 +1,7 @@
 package com.yeef93.demoJpa.users.dto;
 
 import com.yeef93.demoJpa.users.entity.Users;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
