@@ -1,7 +1,6 @@
 package com.yeef93.demoJpa.pocket.dto;
 
 import com.yeef93.demoJpa.pocket.entity.Pocket;
-import com.yeef93.demoJpa.user.entity.User;
 import com.yeef93.demoJpa.wallet.entity.Wallet;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

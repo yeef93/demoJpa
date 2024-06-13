@@ -1,7 +1,6 @@
 package com.yeef93.demoJpa.wallet;
 
 import com.yeef93.demoJpa.responses.Response;
-import com.yeef93.demoJpa.user.entity.User;
 import com.yeef93.demoJpa.wallet.dto.CreateUpdateWalletRequestDTO;
 import com.yeef93.demoJpa.wallet.entity.Wallet;
 import com.yeef93.demoJpa.wallet.service.WalletService;

@@ -5,8 +5,7 @@ import com.yeef93.demoJpa.pocket.dto.CreatePocketRequestDTO;
 import com.yeef93.demoJpa.pocket.entity.Pocket;
 import com.yeef93.demoJpa.pocket.repository.PocketRepository;
 import com.yeef93.demoJpa.pocket.service.PocketService;
-import com.yeef93.demoJpa.wallet.dto.CreateUpdateWalletRequestDTO;
-import com.yeef93.demoJpa.wallet.entity.Wallet;
+import com.yeef93.demoJpa.wallet.repository.WalletRepository;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +16,11 @@ import java.util.Optional;
 @Log
 public class PocketServiceImpl implements PocketService {
     private final PocketRepository pocketRepository;
+    private final WalletRepository walletRepository;
 
-    public PocketServiceImpl(PocketRepository pocketRepository){
+    public PocketServiceImpl(PocketRepository pocketRepository, WalletRepository walletRepository){
         this.pocketRepository = pocketRepository;
+        this.walletRepository = walletRepository;
     }
 
     @Override

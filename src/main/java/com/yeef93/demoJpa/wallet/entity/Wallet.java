@@ -1,6 +1,6 @@
 package com.yeef93.demoJpa.wallet.entity;
 
-import com.yeef93.demoJpa.user.entity.User;
+import com.yeef93.demoJpa.users.entity.Users;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -59,5 +59,5 @@ public class Wallet {
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    private User user;
+    private Users user;
 }

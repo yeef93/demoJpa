@@ -2,7 +2,7 @@ package com.yeef93.demoJpa.wallet.service.impl;
 
 
 import com.yeef93.demoJpa.exceptions.DataNotFoundException;
-import com.yeef93.demoJpa.user.repository.UserRepository;
+import com.yeef93.demoJpa.users.repository.UserRepository;
 import com.yeef93.demoJpa.wallet.dto.CreateUpdateWalletRequestDTO;
 import com.yeef93.demoJpa.wallet.entity.Wallet;
 import com.yeef93.demoJpa.wallet.repository.WalletRepository;

@@ -4,8 +4,6 @@ import com.yeef93.demoJpa.pocket.dto.CreatePocketRequestDTO;
 import com.yeef93.demoJpa.pocket.entity.Pocket;
 import com.yeef93.demoJpa.pocket.service.PocketService;
 import com.yeef93.demoJpa.responses.Response;
-import com.yeef93.demoJpa.wallet.dto.CreateUpdateWalletRequestDTO;
-import com.yeef93.demoJpa.wallet.entity.Wallet;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

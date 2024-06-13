@@ -1,6 +1,6 @@
 package com.yeef93.demoJpa.wallet.dto;
 
-import com.yeef93.demoJpa.user.entity.User;
+import com.yeef93.demoJpa.users.entity.Users;
 import com.yeef93.demoJpa.wallet.entity.Wallet;
 import lombok.Data;
 
@@ -16,7 +16,7 @@ public class CreateUpdateWalletRequestDTO {
         wallet.setName(this.name);
         wallet.setAmount(this.amount);
         wallet.setCurrency(this.currency);
-        User user = new User();
+        Users user = new Users();
         user.setId(this.userId);
         wallet.setUser(user);
 

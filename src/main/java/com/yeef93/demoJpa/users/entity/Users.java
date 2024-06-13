@@ -1,20 +1,22 @@
-package com.yeef93.demoJpa.user.entity;
+package com.yeef93.demoJpa.users.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "tbl_user")
-public class User {
+public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tbl_user_id_gen")
@@ -61,6 +63,17 @@ public class User {
 
     @Column(name = "profilepict")
     private String profilePict;
+
+    @NotNull
+    @ColumnDefault("1")
+    @Column(name = "active_currency", nullable = false)
+    private int activeCurrency;
+
+    @JsonIgnore
+    @Size(max = 100)
+    @NotNull
+    @Column(name = "password", nullable = false, length = 100)
+    private String password;
 
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private Set<Wallet> wallet = new HashSet<>();
