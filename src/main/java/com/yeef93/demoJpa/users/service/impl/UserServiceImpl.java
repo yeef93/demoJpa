@@ -1,5 +1,6 @@
 package com.yeef93.demoJpa.users.service.impl;
 
+import com.yeef93.demoJpa.currency.repository.CurrencyRepository;
 import com.yeef93.demoJpa.exceptions.ApplicationException;
 import com.yeef93.demoJpa.exceptions.DataNotFoundException;
 import com.yeef93.demoJpa.users.dto.RegisterRequestDto;
@@ -17,10 +18,12 @@ import java.util.Optional;
 @Log
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final CurrencyRepository currencyRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder){
+    public UserServiceImpl(UserRepository userRepository, CurrencyRepository currencyRepository, PasswordEncoder passwordEncoder){
         this.userRepository = userRepository;
+        this.currencyRepository = currencyRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -43,6 +46,10 @@ public class UserServiceImpl implements UserService {
         if(userRepository.existsByEmail(user.getEmail())){
             throw new DataNotFoundException("User with email " +user.getEmail()+" already exist.");
         }
+        if (!currencyRepository.existsById(user.getActiveCurrency())) {
+            throw new DataNotFoundException("Currency with ID " + user.getActiveCurrency() + " not exists.");
+        }
+
         Users newUser = user.toEntity();
         var password = passwordEncoder.encode(user.getPassword());
         newUser.setPassword(password);
