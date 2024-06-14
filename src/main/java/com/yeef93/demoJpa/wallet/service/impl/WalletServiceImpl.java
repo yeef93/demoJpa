@@ -41,9 +41,9 @@ public class WalletServiceImpl implements WalletService {
 
     @Override
     public Wallet createWallet(CreateUpdateWalletRequestDTO wallet) {
-//        if(userRepository.existsById(user.getId())){
-//            throw new DataNotFoundException("User with ID" +user.getId()+" already existes.");
-//        }
+        if(!userRepository.existsById(wallet.getUserId())){
+            throw new DataNotFoundException("User with ID " +wallet.getUserId()+" not exist.");
+        }
         return walletRepository.save(wallet.toEntity());
     }
 

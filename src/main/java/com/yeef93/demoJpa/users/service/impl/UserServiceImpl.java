@@ -40,6 +40,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Users register(RegisterRequestDto user) {
+        if(userRepository.existsByEmail(user.getEmail())){
+            throw new DataNotFoundException("User with email " +user.getEmail()+" already exist.");
+        }
         Users newUser = user.toEntity();
         var password = passwordEncoder.encode(user.getPassword());
         newUser.setPassword(password);

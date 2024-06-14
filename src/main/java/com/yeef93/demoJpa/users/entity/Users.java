@@ -78,7 +78,7 @@ public class Users {
     @NotNull
     @ColumnDefault("1")
     @Column(name = "active_currency", nullable = false)
-    private int activeCurrency;
+    private Integer activeCurrency;
 
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private Set<Wallet> wallet = new HashSet<>();
