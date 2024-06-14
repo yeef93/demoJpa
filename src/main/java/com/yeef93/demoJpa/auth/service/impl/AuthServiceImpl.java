@@ -30,6 +30,7 @@ public class AuthServiceImpl implements AuthService {
   }
 
   public String generateToken(Authentication authentication) {
+
     Instant now = Instant.now();
 
     String scope = authentication.getAuthorities()
@@ -48,4 +49,5 @@ public class AuthServiceImpl implements AuthService {
 
     return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
   }
+
 }

@@ -2,6 +2,7 @@ package com.yeef93.demoJpa.users.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -34,6 +35,7 @@ public class Users {
 
     @Size(max = 200)
     @NotNull
+    @Email
     @Column(name = "email", nullable = false, length = 200)
     private String email;
 

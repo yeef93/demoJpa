@@ -12,6 +12,7 @@ public class RegisterRequestDto {
     @NotBlank(message = "Name is required")
     private String name;
 
+    @Email
     @NotBlank(message = "Email is required")
     private String email;
 

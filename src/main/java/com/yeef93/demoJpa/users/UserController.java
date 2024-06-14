@@ -4,6 +4,7 @@ import com.yeef93.demoJpa.responses.Response;
 import com.yeef93.demoJpa.users.dto.RegisterRequestDto;
 import com.yeef93.demoJpa.users.entity.Users;
 import com.yeef93.demoJpa.users.service.UserService;
+import jakarta.validation.Valid;
 import lombok.extern.java.Log;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -38,7 +39,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterRequestDto registerRequestDto) {
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequestDto registerRequestDto) {
         return Response.successfulResponse("User registered successfully", userService.register(registerRequestDto));
     }
 

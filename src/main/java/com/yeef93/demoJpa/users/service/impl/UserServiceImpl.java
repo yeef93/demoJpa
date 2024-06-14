@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
     private final CurrencyRepository currencyRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, CurrencyRepository currencyRepository, PasswordEncoder passwordEncoder){
+    public UserServiceImpl(UserRepository userRepository, CurrencyRepository currencyRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.currencyRepository = currencyRepository;
         this.passwordEncoder = passwordEncoder;
@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Users> findAll() {
-        return  userRepository.findAll();
+        return userRepository.findAll();
     }
 
     @Override
@@ -43,11 +43,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Users register(RegisterRequestDto user) {
-        if(userRepository.existsByEmail(user.getEmail())){
-            throw new DataNotFoundException("User with email " +user.getEmail()+" already exist.");
-        }
         if (!currencyRepository.existsById(user.getActiveCurrency())) {
             throw new DataNotFoundException("Currency with ID " + user.getActiveCurrency() + " not exists.");
+        }
+        if (userRepository.existsByEmail(user.getEmail())) {
+            throw new DataNotFoundException("User with email " + user.getEmail() + " already exist.");
         }
 
         Users newUser = user.toEntity();
@@ -60,4 +60,6 @@ public class UserServiceImpl implements UserService {
     public Users findByEmail(String email) {
         return userRepository.findByEmail(email).orElseThrow(() -> new ApplicationException("User not found"));
     }
+
+
 }
